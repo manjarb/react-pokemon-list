@@ -1,0 +1,29 @@
+$spacing: 0, 5, 10, 15, 20, 25, 30, 35, 40, 45; // Modify this to generate your spacing classes
+$unit: px; // Modify this to specify your unit eg: em, pt, %.
+
+$directions:(
+  l: left,
+  t: top,
+  r: right,
+  b: bottom,
+  v: top,
+  h: left
+);
+@mixin generateSpacing($prop, $short  ) {
+   @each $space in $spacing{
+    .#{$short}a-#{$space} { #{$prop}: $space + $unit}
+    @each $key,$val in $directions{
+      .#{$short}#{$key}-#{$space} {
+        #{$prop}-#{$val}: $space + $unit;
+        @if $key == v {
+          #{$prop}-bottom: $space + $unit;
+        }
+        @if $key == h {
+          #{$prop}-right: $space + $unit;
+        }
+      }
+    }
+  }
+}
+@include generateSpacing(padding , p);
+@include generateSpacing(margin , m);
