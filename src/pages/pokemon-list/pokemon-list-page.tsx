@@ -8,6 +8,7 @@ import Pagination, {
 import { Spinner } from "../../components/spinner.component";
 import { config } from "../../data/config";
 import { getPaginationPayload } from "../../helpers/utils";
+import useFavorite from "../../hooks/use-favorite";
 import useGetAxios from "../../hooks/use-get-axios";
 import { PokemonList, PokemonListResult } from "../../models/pokemon.model";
 import PokemonListCard from "./components/pokemon-list-card.component";
@@ -17,6 +18,7 @@ const LIMIT = 50;
 
 export default function PokemonListPage() {
   let navigate = useNavigate();
+  const { favorite, setFavorite } = useFavorite();
   const [page, setPage] = useState(1);
   const [total, setTotal] = useState(0);
   const [results, setResults] = useState<PokemonListResult[]>([]);
@@ -56,6 +58,16 @@ export default function PokemonListPage() {
     navigate(pageUrl);
   }, []);
 
+  const onIconClick = useCallback(
+    (name: string) => {
+      setFavorite((prev) => ({
+        ...prev,
+        [name]: !prev[name],
+      }));
+    },
+    [favorite]
+  );
+
   const handlePageClick = (event: PaginationPageChange) => {
     const currentPage = event.selected + 1;
     setPage(currentPage);
@@ -81,7 +93,9 @@ export default function PokemonListPage() {
                 <PokemonListCard
                   name={name}
                   image={image}
+                  isFavorite={favorite[name]}
                   onButtonClick={onButtonClick}
+                  onIconClick={onIconClick}
                 />
               </div>
             ))}

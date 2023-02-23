@@ -7,13 +7,17 @@ import Button from "react-bootstrap/Button";
 interface PokemonListCardProps {
   name: string;
   image?: string;
+  isFavorite: boolean;
   onButtonClick?: (name: string) => void;
+  onIconClick?: (name: string) => void;
 }
 
 export default function PokemonListCard({
   name,
   image,
+  isFavorite = false,
   onButtonClick,
+  onIconClick,
 }: PokemonListCardProps) {
   return (
     <div className="card">
@@ -34,7 +38,12 @@ export default function PokemonListCard({
           >
             Detail
           </Button>
-          <img className="pointer ph-5" src={heartIcon} alt="favorited icon" />
+          <img
+            className="pointer ph-5"
+            src={isFavorite ? loverIcon : heartIcon}
+            alt="favorited icon"
+            onClick={() => onIconClick && onIconClick(name)}
+          />
         </div>
       </div>
     </div>
