@@ -2,13 +2,16 @@ import { useCallback, useEffect, useMemo } from "react";
 import { useParams } from "react-router-dom";
 import { Spinner } from "../../components/spinner.component";
 import { config } from "../../data/config";
+import { removeArrayIfValueExist } from "../../helpers/utils";
 import useFavorite from "../../hooks/use-favorite";
+import useFavoriteList from "../../hooks/use-favorite-list";
 import useGetAxios from "../../hooks/use-get-axios";
-import { Pokemon } from "../../models/pokemon.model";
+import { Pokemon, PokemonListResult } from "../../models/pokemon.model";
 import PokemonDetailSection from "./components/pokemon-detail-section.component";
 
 export default function PokemonDetailPage() {
   let { name } = useParams();
+  const { favoriteList, setFavoriteList } = useFavoriteList();
   const { favorite, setFavorite } = useFavorite();
   const { data, loading, fetchData } = useGetAxios<Pokemon>();
 
@@ -31,7 +34,15 @@ export default function PokemonDetailPage() {
   }, [name, favorite]);
 
   const onIconClick = useCallback(
-    (name: string) => {
+    (name: string, id: number, image: string) => {
+      setFavoriteList((prev) => {
+        return removeArrayIfValueExist<PokemonListResult>(prev, "name", name, {
+          name,
+          url: `${config.apiUrl}/pokemon/${id}/`,
+          image,
+        });
+      });
+
       setFavorite((prev) => {
         return {
           ...prev,
@@ -39,7 +50,7 @@ export default function PokemonDetailPage() {
         };
       });
     },
-    [favorite]
+    [favorite, favoriteList]
   );
 
   return (

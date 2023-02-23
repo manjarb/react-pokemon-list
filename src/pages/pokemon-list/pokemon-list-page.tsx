@@ -1,4 +1,10 @@
-import { ChangeEvent, ChangeEventHandler, useCallback, useEffect, useState } from "react";
+import {
+  ChangeEvent,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import { useNavigate } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 
@@ -8,17 +14,22 @@ import Pagination, {
 } from "../../components/pagination.component";
 import { Spinner } from "../../components/spinner.component";
 import { config } from "../../data/config";
-import { getPaginationPayload } from "../../helpers/utils";
+import {
+  getPaginationPayload,
+  toggleArrayIfValueExist,
+} from "../../helpers/utils";
 import useFavorite from "../../hooks/use-favorite";
 import useGetAxios from "../../hooks/use-get-axios";
 import { PokemonList, PokemonListResult } from "../../models/pokemon.model";
 import PokemonListCard from "./components/pokemon-list-card.component";
+import useFavoriteList from "../../hooks/use-favorite-list";
 
 const LIMIT = 50;
 
 export default function PokemonListPage() {
   let navigate = useNavigate();
   const { favorite, setFavorite } = useFavorite();
+  const { favoriteList, setFavoriteList } = useFavoriteList();
   const [isShowFavorite, setIsShowFavorite] = useState(false);
   const [page, setPage] = useState(1);
   const [total, setTotal] = useState(0);
@@ -61,14 +72,21 @@ export default function PokemonListPage() {
 
   const onIconClick = useCallback(
     (name: string) => {
-      console.log(name, ' :name');
+      setFavoriteList((prev) => {
+        return toggleArrayIfValueExist<PokemonListResult>(prev, results, "name", name);
+      });
+
       setFavorite((prev) => ({
         ...prev,
         [name]: !prev[name],
       }));
     },
-    [favorite]
+    [favorite, favoriteList, results]
   );
+
+  const filteredResults = useMemo(() => {
+    return isShowFavorite ? favoriteList : results;
+  }, [favoriteList, results, isShowFavorite]);
 
   const handlePageClick = (event: PaginationPageChange) => {
     const currentPage = event.selected + 1;
@@ -76,18 +94,19 @@ export default function PokemonListPage() {
   };
 
   const onFilterChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setIsShowFavorite(event.target.checked);
-  }
+    const { checked } = event.target
+    setIsShowFavorite(checked);
+  };
 
   return (
     <>
       <div className="row">
         <div className="col-12 col-lg-2 mb-20">
           <div className={`${classes.filterBox} pa-15`}>
-            <p>Filter</p>
+            <p className="fw-bold">Filter</p>
             <Form.Check
-              type='checkbox'
-              id='favorite-check'
+              type="checkbox"
+              id="favorite-check"
               label="Favorite"
               value="etst"
               onChange={onFilterChange}
@@ -100,9 +119,9 @@ export default function PokemonListPage() {
               <Spinner />
             </div>
           ) : (
-            results && (
+            filteredResults && (
               <div className="row">
-                {results.map(({ name, image }) => (
+                {filteredResults.map(({ name, image }) => (
                   <div
                     key={`${name}-list`}
                     className="col-md-4 col-sm-4 col-lg-3 col-6 mb-20"
@@ -119,13 +138,14 @@ export default function PokemonListPage() {
               </div>
             )
           )}
-          <div className="pt-10">
+          {!isShowFavorite && <div className="pt-10">
             <Pagination
+              currentPage={page - 1}
               total={total}
               limit={LIMIT}
               onPageChange={handlePageClick}
             />
-          </div>
+          </div>}
         </div>
       </div>
     </>

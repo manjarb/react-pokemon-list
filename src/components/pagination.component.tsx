@@ -8,12 +8,14 @@ export interface PaginationPageChange {
 interface PaginationProps {
   total: number;
   limit: number;
+  currentPage: number;
   onPageChange: ({ selected }: PaginationPageChange) => void;
 }
 
 export default function Pagination({
   total = 0,
   limit = 0,
+  currentPage,
   onPageChange,
 }: PaginationProps) {
 
@@ -25,6 +27,7 @@ export default function Pagination({
     <ReactPaginate
       breakLabel="..."
       nextLabel="next"
+      forcePage={currentPage}
       onPageChange={onPageChange}
       pageCount={pageCount}
       previousLabel="previous"

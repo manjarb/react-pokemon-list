@@ -11,11 +11,11 @@ import PokemonAttributesBox from "./pokemon-attributes-box.component";
 interface PokemonDetailSectionProps {
   data: Pokemon;
   isFavorite: boolean;
-  onIconClick: (name: string) => void;
+  onIconClick: (name: string, id: number, image: string) => void;
 }
 
 export default function PokemonDetailSection({
-  data: { name, types, height, weight, stats, abilities },
+  data: { name, types, height, weight, stats, abilities, id, sprites },
   isFavorite,
   onIconClick,
 }: PokemonDetailSectionProps) {
@@ -25,7 +25,7 @@ export default function PokemonDetailSection({
         <span className="mr-10">{name}</span>
         <FavoriteIcon
           isFavorite={isFavorite}
-          onClick={() => onIconClick(name)}
+          onClick={() => onIconClick(name, id, sprites.front_default)}
         />
       </h1>
       <p>
