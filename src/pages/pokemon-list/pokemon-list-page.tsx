@@ -1,5 +1,7 @@
-import { useCallback, useEffect, useState } from "react";
+import { ChangeEvent, ChangeEventHandler, useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Form from "react-bootstrap/Form";
+
 import classes from "./pokemon-list-page.module.scss";
 import Pagination, {
   PaginationPageChange,
@@ -17,6 +19,7 @@ const LIMIT = 50;
 export default function PokemonListPage() {
   let navigate = useNavigate();
   const { favorite, setFavorite } = useFavorite();
+  const [isShowFavorite, setIsShowFavorite] = useState(false);
   const [page, setPage] = useState(1);
   const [total, setTotal] = useState(0);
   const [results, setResults] = useState<PokemonListResult[]>([]);
@@ -72,15 +75,26 @@ export default function PokemonListPage() {
     setPage(currentPage);
   };
 
+  const onFilterChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setIsShowFavorite(event.target.checked);
+  }
+
   return (
     <>
       <div className="row">
-        <div className="col-12 col-lg-3">
+        <div className="col-12 col-lg-2 mb-20">
           <div className={`${classes.filterBox} pa-15`}>
             <p>Filter</p>
+            <Form.Check
+              type='checkbox'
+              id='favorite-check'
+              label="Favorite"
+              value="etst"
+              onChange={onFilterChange}
+            />
           </div>
         </div>
-        <div className="col-12 col-lg-9">
+        <div className="col-12 col-lg-10">
           {loading ? (
             <div className="text-center">
               <Spinner />
@@ -91,7 +105,7 @@ export default function PokemonListPage() {
                 {results.map(({ name, image }) => (
                   <div
                     key={`${name}-list`}
-                    className="col-md-3 col-sm-4 col-lg-3 col-6 mb-20"
+                    className="col-md-4 col-sm-4 col-lg-3 col-6 mb-20"
                   >
                     <PokemonListCard
                       name={name}
