@@ -5,7 +5,7 @@ interface PokemonAttributesBoxProps {
 
 export default function PokemonAttributesBox({title, children}: PokemonAttributesBoxProps) {
   return (
-    <div className="col-md-4">
+    <div data-testid="attribute-box" className="col-md-4">
       <span className="fw-bold">{title}</span>
       <ul className="pl-15">{children}</ul>
     </div>

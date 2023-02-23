@@ -9,7 +9,7 @@ import { Pokemon } from "../../../models/pokemon.model";
 import PokemonAttributesBox from "./pokemon-attributes-box.component";
 
 interface PokemonDetailSectionProps {
-  data: Pokemon;
+  data: Omit<Pokemon, 'moves'>;
   isFavorite: boolean;
   onIconClick: (name: string, id: number, image: string) => void;
 }
@@ -28,7 +28,7 @@ export default function PokemonDetailSection({
           onClick={() => onIconClick(name, id, sprites.front_default)}
         />
       </h1>
-      <p>
+      <p data-testid="types">
         {types.map((t, index) => (
           <span key={t.type.name} className="mr-5 text-capitalize">
             {t.type.name}
@@ -36,7 +36,7 @@ export default function PokemonDetailSection({
           </span>
         ))}
       </p>
-      <p>
+      <p data-testid="body">
         <span className="fw-bold">Height:</span>{" "}
         {convertDeciToCentiMeter(height)} cm
         <span className="fw-bold ml-15">Weight:</span>{" "}

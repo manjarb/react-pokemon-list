@@ -18,7 +18,6 @@ export default function Pagination({
   currentPage,
   onPageChange,
 }: PaginationProps) {
-
   const pageCount = useMemo(() => {
     return Math.ceil(total / limit);
   }, [total, limit])

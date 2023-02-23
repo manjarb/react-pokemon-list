@@ -16,11 +16,12 @@ export function convertHectoToKiloGrams(hectoGram: number): number {
 }
 
 export function toggleArrayIfValueExist<T>(
-  list: T[],
+  prevList: T[],
   results: T[],
   key: keyof T,
   value: string
 ) {
+  const list = prevList.slice();
   const index = list.findIndex((l) => l[key] === value);
   if (index !== -1) {
     list.splice(index, 1);
@@ -36,19 +37,17 @@ export function toggleArrayIfValueExist<T>(
 }
 
 export function removeArrayIfValueExist<T>(
-  list: T[],
+  prevList: T[],
   key: keyof T,
   value: string,
   data: T
 ) {
+  const list = prevList.slice();
   const index = list.findIndex((l) => l[key] === value);
   if (index !== -1) {
     list.splice(index, 1);
     return list;
   } else {
-    return [
-      ...list,
-      data,
-    ];
+    return [...list, data];
   }
 }

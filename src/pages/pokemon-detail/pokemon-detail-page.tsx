@@ -62,7 +62,7 @@ export default function PokemonDetailPage() {
       ) : (
         data && (
           <div className="row">
-            <div className="col-12 col-md-3 text-center">
+            <div data-testid="pokemon-images-box" className="col-12 col-md-3 text-center">
               <img src={data.sprites.front_default} alt={`${name} front`} />
               <img src={data.sprites.back_default} alt={`${name} back`} />
             </div>
