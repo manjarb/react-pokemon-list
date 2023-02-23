@@ -3,6 +3,7 @@ import heartIcon from "../../../assets/icons/heart.png";
 import classes from "./pokemon-list-card.module.scss";
 
 import Button from "react-bootstrap/Button";
+import FavoriteIcon from "../../../components/favorite-icon.component";
 
 interface PokemonListCardProps {
   name: string;
@@ -29,7 +30,7 @@ export default function PokemonListCard({
         />
       )}
       <div className="card-body text-center">
-        <h5 className="card-title">{name}</h5>
+        <h5 className="card-title text-capitalize">{name}</h5>
         <div>
           <Button
             variant="info"
@@ -38,10 +39,8 @@ export default function PokemonListCard({
           >
             Detail
           </Button>
-          <img
-            className="pointer ph-5"
-            src={isFavorite ? loverIcon : heartIcon}
-            alt="favorited icon"
+          <FavoriteIcon
+            isFavorite={isFavorite}
             onClick={() => onIconClick && onIconClick(name)}
           />
         </div>

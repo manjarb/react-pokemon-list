@@ -1,7 +1,6 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-import pokemonLogo from "../../assets/images/Pokemon_logo.png";
+import classes from "./pokemon-list-page.module.scss";
 import Pagination, {
   PaginationPageChange,
 } from "../../components/pagination.component";
@@ -12,7 +11,6 @@ import useFavorite from "../../hooks/use-favorite";
 import useGetAxios from "../../hooks/use-get-axios";
 import { PokemonList, PokemonListResult } from "../../models/pokemon.model";
 import PokemonListCard from "./components/pokemon-list-card.component";
-import classes from "./pokemon-list-page.module.scss";
 
 const LIMIT = 50;
 
@@ -60,6 +58,7 @@ export default function PokemonListPage() {
 
   const onIconClick = useCallback(
     (name: string) => {
+      console.log(name, ' :name');
       setFavorite((prev) => ({
         ...prev,
         [name]: !prev[name],
@@ -74,41 +73,47 @@ export default function PokemonListPage() {
   };
 
   return (
-    <div className="container pt-30 pb-40">
-      <div className="text-center mb-30">
-        <img className={classes.logo} src={pokemonLogo} alt="pokemon logo" />
-      </div>
-      {loading ? (
-        <div className="text-center">
-          <Spinner />
-        </div>
-      ) : (
-        results && (
-          <div className="row">
-            {results.map(({ name, image }) => (
-              <div
-                key={`${name}-list`}
-                className="col-md-3 col-sm-4 col-6 mb-20"
-              >
-                <PokemonListCard
-                  name={name}
-                  image={image}
-                  isFavorite={favorite[name]}
-                  onButtonClick={onButtonClick}
-                  onIconClick={onIconClick}
-                />
-              </div>
-            ))}
+    <>
+      <div className="row">
+        <div className="col-12 col-lg-3">
+          <div className={`${classes.filterBox} pa-15`}>
+            <p>Filter</p>
           </div>
-        )
-      )}
-      <div className="pt-10">
-        <Pagination
-          total={total}
-          limit={LIMIT}
-          onPageChange={handlePageClick}
-        />
+        </div>
+        <div className="col-12 col-lg-9">
+          {loading ? (
+            <div className="text-center">
+              <Spinner />
+            </div>
+          ) : (
+            results && (
+              <div className="row">
+                {results.map(({ name, image }) => (
+                  <div
+                    key={`${name}-list`}
+                    className="col-md-3 col-sm-4 col-lg-3 col-6 mb-20"
+                  >
+                    <PokemonListCard
+                      name={name}
+                      image={image}
+                      isFavorite={favorite[name]}
+                      onButtonClick={onButtonClick}
+                      onIconClick={onIconClick}
+                    />
+                  </div>
+                ))}
+              </div>
+            )
+          )}
+          <div className="pt-10">
+            <Pagination
+              total={total}
+              limit={LIMIT}
+              onPageChange={handlePageClick}
+            />
+          </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
