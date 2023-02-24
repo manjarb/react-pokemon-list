@@ -1,5 +1,3 @@
-import { config } from "../data/config";
-
 export function getPaginationPayload(page: number, limit: number) {
   return {
     limit,

@@ -8,7 +8,6 @@ import {
   mockPokemonLastResults,
   mockPokemonListResponse,
 } from "../../data/mock";
-import * as useGetAxios from "../../hooks/use-get-axios";
 import PokemonListPage from "./pokemon-list-page";
 import { config } from "../../data/config";
 

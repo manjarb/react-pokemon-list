@@ -1,5 +1,3 @@
-import loverIcon from "../../../assets/icons/lover.png";
-import heartIcon from "../../../assets/icons/heart.png";
 import classes from "./pokemon-list-card.module.scss";
 
 import Button from "react-bootstrap/Button";
@@ -26,7 +24,7 @@ export default function PokemonListCard({
         <img
           className={`card-img-top ${classes.image}`}
           src={image}
-          alt={`${name} image`}
+          alt={`${name}`}
         />
       )}
       <div className="card-body text-center">
