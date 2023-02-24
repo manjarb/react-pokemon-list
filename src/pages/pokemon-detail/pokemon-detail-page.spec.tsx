@@ -3,13 +3,10 @@ import userEvent from '@testing-library/user-event';
 import PokemonDetailPage from "./pokemon-detail-page";
 import ReactRouter, { MemoryRouter } from "react-router";
 
-import useFavorite from "../../hooks/use-favorite";
-import * as useFavoriteList from "../../hooks/use-favorite-list";
 import * as useGetAxios from "../../hooks/use-get-axios";
 import { mockPokemonDetail } from "../../data/mock";
 import loverIcon from "../../assets/icons/lover.png";
 import heartIcon from "../../assets/icons/heart.png";
-
 
 describe("PokemonDetailPage", () => {
   beforeAll(() => {

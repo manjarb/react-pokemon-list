@@ -1,10 +1,10 @@
 import { render, screen } from "@testing-library/react";
-import ReactRouter, { MemoryRouter } from "react-router";
+import { MemoryRouter } from "react-router";
 
 import { mockPokemonDetail } from "../../../data/mock";
 import PokemonDetailSection from "./pokemon-detail-section.component";
 
-describe("PokemonDetailSection", () => {
+describe("PokemonDetailSection Component", () => {
   const onIconClick = jest.fn();
   it("Load component correctly", () => {
     const { container } = render(
@@ -44,6 +44,26 @@ describe("PokemonDetailSection", () => {
     const abilityListElements = abilityElements.getElementsByTagName("li");
     expect(abilityListElements.length).toEqual(
       mockPokemonDetail.abilities.length
+    );
+  });
+
+  it("has correct link information", () => {
+    render(
+      <MemoryRouter>
+        <PokemonDetailSection
+          data={mockPokemonDetail}
+          isFavorite={true}
+          onIconClick={onIconClick}
+        />
+      </MemoryRouter>
+    );
+
+    const linkBox = screen.getByTestId("detail-link");
+    expect(linkBox.getElementsByTagName("a")[0].getAttribute("href")).toEqual(
+      "/"
+    );
+    expect(linkBox.getElementsByClassName("btn-link")[0].innerHTML).toEqual(
+      "Back to List Page"
     );
   });
 });

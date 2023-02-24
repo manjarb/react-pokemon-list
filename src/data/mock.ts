@@ -823,3 +823,129 @@ export const mockPokemonDetail = {
   ],
   weight: 130,
 };
+
+export const mockPokemonListResponse = {
+  count: 1279,
+  next: "https://pokeapi.co/api/v2/pokemon?offset=50&limit=50",
+  previous: null,
+  results: mockPokemonResults,
+};
+
+export const mockPokemonLastResults = [
+  {
+    name: "avalugg-hisui",
+    url: "https://pokeapi.co/api/v2/pokemon/10243/",
+  },
+  {
+    name: "decidueye-hisui",
+    url: "https://pokeapi.co/api/v2/pokemon/10244/",
+  },
+  {
+    name: "dialga-origin",
+    url: "https://pokeapi.co/api/v2/pokemon/10245/",
+  },
+  {
+    name: "palkia-origin",
+    url: "https://pokeapi.co/api/v2/pokemon/10246/",
+  },
+  {
+    name: "basculin-white-striped",
+    url: "https://pokeapi.co/api/v2/pokemon/10247/",
+  },
+  {
+    name: "basculegion-female",
+    url: "https://pokeapi.co/api/v2/pokemon/10248/",
+  },
+  {
+    name: "enamorus-therian",
+    url: "https://pokeapi.co/api/v2/pokemon/10249/",
+  },
+  {
+    name: "tauros-paldea-combat-breed",
+    url: "https://pokeapi.co/api/v2/pokemon/10250/",
+  },
+  {
+    name: "tauros-paldea-blaze-breed",
+    url: "https://pokeapi.co/api/v2/pokemon/10251/",
+  },
+  {
+    name: "tauros-paldea-aqua-breed",
+    url: "https://pokeapi.co/api/v2/pokemon/10252/",
+  },
+  {
+    name: "wooper-paldea",
+    url: "https://pokeapi.co/api/v2/pokemon/10253/",
+  },
+  {
+    name: "oinkologne-female",
+    url: "https://pokeapi.co/api/v2/pokemon/10254/",
+  },
+  {
+    name: "dudunsparce-three-segment",
+    url: "https://pokeapi.co/api/v2/pokemon/10255/",
+  },
+  {
+    name: "palafin-hero",
+    url: "https://pokeapi.co/api/v2/pokemon/10256/",
+  },
+  {
+    name: "maushold-family-of-three",
+    url: "https://pokeapi.co/api/v2/pokemon/10257/",
+  },
+  {
+    name: "tatsugiri-droopy",
+    url: "https://pokeapi.co/api/v2/pokemon/10258/",
+  },
+  {
+    name: "tatsugiri-stretchy",
+    url: "https://pokeapi.co/api/v2/pokemon/10259/",
+  },
+  {
+    name: "squawkabilly-blue-plumage",
+    url: "https://pokeapi.co/api/v2/pokemon/10260/",
+  },
+  {
+    name: "squawkabilly-yellow-plumage",
+    url: "https://pokeapi.co/api/v2/pokemon/10261/",
+  },
+  {
+    name: "squawkabilly-white-plumage",
+    url: "https://pokeapi.co/api/v2/pokemon/10262/",
+  },
+  {
+    name: "gimmighoul-roaming",
+    url: "https://pokeapi.co/api/v2/pokemon/10263/",
+  },
+  {
+    name: "koraidon-limited-build",
+    url: "https://pokeapi.co/api/v2/pokemon/10264/",
+  },
+  {
+    name: "koraidon-sprinting-build",
+    url: "https://pokeapi.co/api/v2/pokemon/10265/",
+  },
+  {
+    name: "koraidon-swimming-build",
+    url: "https://pokeapi.co/api/v2/pokemon/10266/",
+  },
+  {
+    name: "koraidon-gliding-build",
+    url: "https://pokeapi.co/api/v2/pokemon/10267/",
+  },
+  {
+    name: "miraidon-low-power-mode",
+    url: "https://pokeapi.co/api/v2/pokemon/10268/",
+  },
+  {
+    name: "miraidon-drive-mode",
+    url: "https://pokeapi.co/api/v2/pokemon/10269/",
+  },
+  {
+    name: "miraidon-aquatic-mode",
+    url: "https://pokeapi.co/api/v2/pokemon/10270/",
+  },
+  {
+    name: "miraidon-glide-mode",
+    url: "https://pokeapi.co/api/v2/pokemon/10271/",
+  },
+];

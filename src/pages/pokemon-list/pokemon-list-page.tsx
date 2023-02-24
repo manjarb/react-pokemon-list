@@ -102,13 +102,15 @@ export default function PokemonListPage() {
     <>
       <div className="row">
         <div className="col-12 col-lg-2 mb-20">
-          <div className={`${classes.filterBox} pa-15`}>
+          <div
+            data-testid="filter-box"
+            className={`${classes.filterBox} pa-15`}
+          >
             <p className="fw-bold">Filter</p>
             <Form.Check
               type="checkbox"
               id="favorite-check"
               label="Favorite"
-              value="etst"
               onChange={onFilterChange}
             />
           </div>
@@ -120,7 +122,7 @@ export default function PokemonListPage() {
             </div>
           ) : (
             filteredResults && (
-              <div className="row">
+              <div data-testid="result-box" className="row">
                 {filteredResults.map(({ name, image }) => (
                   <div
                     key={`${name}-list`}
@@ -138,14 +140,16 @@ export default function PokemonListPage() {
               </div>
             )
           )}
-          {!isShowFavorite && <div className="pt-10">
-            <Pagination
-              currentPage={page - 1}
-              total={total}
-              limit={LIMIT}
-              onPageChange={handlePageClick}
-            />
-          </div>}
+          {!isShowFavorite && (
+            <div className="pt-10">
+              <Pagination
+                currentPage={page - 1}
+                total={total}
+                limit={LIMIT}
+                onPageChange={handlePageClick}
+              />
+            </div>
+          )}
         </div>
       </div>
     </>

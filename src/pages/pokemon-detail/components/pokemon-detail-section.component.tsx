@@ -63,7 +63,7 @@ export default function PokemonDetailSection({
         </PokemonAttributesBox>
       </div>
 
-      <div>
+      <div data-testid="detail-link">
         <Link to={`/`}>
           <Button variant="link">Back to List Page</Button>
         </Link>

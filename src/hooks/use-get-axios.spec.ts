@@ -27,7 +27,6 @@ describe("useGetAxios", () => {
 
     await act(async () => {
       await result.current.fetchData("url");
-
     });
     expect(result.current.data).toEqual(mockPokemonResults);
   });
